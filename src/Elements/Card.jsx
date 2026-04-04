@@ -24,13 +24,13 @@ const Card = (p) => {
         <div className="h-full w-full flex justify-center items-center">
           <div className="relative w-full flex border-3 border-[#14c38e] rounded-full">
             <input
-              className="w-full focus:outline-none px-6 py-3 rounded-full border-none"
+              className="w-full focus:outline-none px-4 md:px-6 py-2 md:py-3 rounded-full border-none"
               type="text"
               placeholder={placeholder}
               value={n}
               onChange={(e) => setN(e.target.value)}
             />
-            <button className="absolute right-0 bg-[#14c38e] rounded-full px-12 py-3 text-white">
+            <button className="absolute right-0 bg-[#14c38e] rounded-full px-6 md:px-12 py-2 md:py-3 text-white">
               Submit
             </button>
           </div>
