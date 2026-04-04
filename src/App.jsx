@@ -1,22 +1,51 @@
-import React, { useState } from "react";
-import Landing from "./Elements/Landing";
+import React, { useEffect, useState } from "react";
 import IntroLoader from "./IntroLoader";
+import Card from "./Elements/Card";
+import { bilanganGanjil, bilanganKuadrat } from "./Controllers/controllers";
 
 const App = () => {
   const [loaderFinished, setLoaderFinished] = useState(false);
+  const [hasilGanjil, setHasilGanjil] = useState("");
+  const [hasilKuadrat, setHasilKuadrat] = useState("");
+
+  const funcKuadrat = (params) => {
+    if (isNaN(params)) {
+      setHasilKuadrat("inputnya nomor dong, bre!");
+      return;
+    }
+    const result = bilanganKuadrat(params);
+    setHasilKuadrat(result);
+  };
+
+  const funcGanjil = (params) => {
+    if (isNaN(params)) {
+      setHasilGanjil("inputnya nomor dong, bre!");
+      return;
+    }
+    const result = bilanganGanjil(params);
+    setHasilGanjil(result);
+  };
+
   return (
     <>
-      {/* {!loaderFinished && (
+      {!loaderFinished && (
         <IntroLoader onComplete={() => setLoaderFinished(true)} />
-      )} */}
+      )}
 
       <main
-        className="h-screen w-full flex p-6 gap-6"
-
         // style={{ opacity: loaderFinished ? 1 : 0, transition: "opacity 0.5s" }}
+        className="h-screen w-full flex p-6 gap-6 flex-col justify-between md:flex-row"
       >
-        <Landing />
-        <Landing />
+        <Card
+          typeOfMath="Bilangan Ganjil"
+          hasil={hasilGanjil}
+          input={funcGanjil}
+        />
+        <Card
+          typeOfMath="Bilangan Kuadrat"
+          hasil={hasilKuadrat}
+          input={funcKuadrat}
+        />
       </main>
     </>
   );
