@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Hitung Bilangan</title>
+</head>
+<body>
+
+    <h2>Hitung Bilangan</h2>
+
+    <input type="number" id="nilai" placeholder="Masukkan n">
+    <button onclick="hitung()">Hitung</button>
+
+    <div id="output"></div>
+
+    <script>
+        // =========================
+        // RUMUS MATEMATIKA
+        // =========================
+        function bilanganKuadrat(n) {
+            let n1 = n + 1;
+            let n2 = 2 * n + 1;
+            return (n * n1 * n2) / 6;
+        }
+
+        function bilanganGanjil(n) {
+            return n * n;
+        }
+
+        // =========================
+        // TANPA RUMUS (LOOP)
+        // =========================
+        function hitungManual(n) {
+            let jumlah = 0;
+            let teks = "<b>Langkah:</b><br>";
+
+            let batas = 20;
+
+            for (let i = 1; i <= n; i++) {
+                let kuadrat = i * i;
+                jumlah += kuadrat;
+
+                if (i <= batas) {
+                    teks += i + "² = " + kuadrat + "<br>";
+                } else if (i === batas + 1) {
+                    teks += "...<br>";
+                } else if (i > n - batas) {
+                    teks += i + "² = " + kuadrat + "<br>";
+                }
+            }
+
+            teks += "<br><b>Hasil Manual:</b><br>";
+            teks += "Jumlah kuadrat = <b>" + jumlah + "</b><br><br>";
+
+            return teks;
+        }
+
+        // =========================
+        // FUNGSI UTAMA
+        // =========================
+        function hitung() {
+            let n = parseInt(document.getElementById("nilai").value);
+            let output = document.getElementById("output");
+
+            output.innerHTML = "";
+
+            // Validasi
+            if (isNaN(n) || n < 1) {
+                output.innerHTML = "Error: n harus ≥ 1";
+                return;
+            }
+
+            // Hasil rumus
+            let hasilRumus = bilanganKuadrat(n);
+            let hasilGanjil = bilanganGanjil(n);
+
+            // Hasil manual
+            let teksManual = hitungManual(n);
+
+            // Output gabungan
+            output.innerHTML =
+                "<b>Hasil Rumus:</b><br>" +
+                "Jumlah kuadrat = <b>" + hasilRumus + "</b><br>" +
+                "Bilangan ganjil ke-n = <b>" + hasilGanjil + "</b><br><br>" +
+                teksManual;
+        }
+    </script>
+
+</body>
+</html>
